@@ -6,6 +6,7 @@
 </h1>
 
 <h4 align="center">A platform signalRGB users can upload and download SignalRGB effects</h4>
+<h4 align="center">This app  is in no way affiliated with WhirlwindFX or SignalRGB!</h4>
 
 
 <p align="center">

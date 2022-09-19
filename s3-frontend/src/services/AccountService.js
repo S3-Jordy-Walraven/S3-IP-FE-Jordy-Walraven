@@ -2,19 +2,25 @@ import axios from "axios";
 
 const ACCOUNT_BASE_REST_API_URL = "http://localhost:8080/api/v1/account";
 class AccountService {
-  loginUser(jwt) {
-    console.log(jwt);
-    return axios.post(
+  async AssignUser(jwt) {
+    let account = AccountService.getUser(jwt);
+    return account;
+  }
+
+  async loginUser() {
+    return await axios.get(ACCOUNT_BASE_REST_API_URL, {
+      withCredentials: true,
+    });
+  }
+
+  async getUser(jwt) {
+    return await axios.post(
       ACCOUNT_BASE_REST_API_URL + `?loginValue=${jwt.credential}`,
       null,
       {
         withCredentials: true,
       }
     );
-  }
-
-  getUser() {
-    return axios.get(ACCOUNT_BASE_REST_API_URL, { withCredentials: true });
   }
 
   parseJwt(token) {

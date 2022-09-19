@@ -14,16 +14,13 @@ const SignUpPage = () => {
         buttonText="Sign In with Google"
         onSuccess={(response) => {
           const service = new AccountService();
-          console.log(service.parseJwt(response.credential));
-
-          service.loginUser(response);
+          service.getUser(response);
           navigate("/");
         }}
         onFailure={(response) => {
           console.log(response);
         }}
         isSignedIn={true}
-        cookiePolicy={"single_host_origin"}
         useOneTap
         auto_select
       />

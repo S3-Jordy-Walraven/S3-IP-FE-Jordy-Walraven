@@ -3,12 +3,8 @@ import AccountService from "../services/AccountService";
 const Homepage = () => {
   const service = new AccountService();
   useEffect(() => {
-    const data = service.getUser();
-    if(data.data != null){
- console.log(service.parseJwt());
-    }
-   
-  }, []);
+   service.loginUser();
+  });
 
   return (
     <div>

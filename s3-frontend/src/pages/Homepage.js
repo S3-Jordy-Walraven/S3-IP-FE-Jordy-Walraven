@@ -1,10 +1,5 @@
-import React, { useEffect } from "react";
-import AccountService from "../services/AccountService";
+import React from "react";
 const Homepage = () => {
-  const service = new AccountService();
-  useEffect(() => {
-   service.loginUser();
-  });
 
   return (
     <div>

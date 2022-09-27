@@ -1,19 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import CanvasService from "../services/CanvasService";
+import sanitizeHtml from "sanitize-html";
 
 const Canvas = (props) => {
   var canvas;
   var ctx;
-  var totalX = 0;
-  var totalY = 0;
   var cService = new CanvasService();
 
+  const divRef = useRef();
+  var insertScript;
   function GetHtml(content) {
     if (content == false) {
       cService.getHtmlText(props.fileInput, GetHtml);
     } else {
       console.log(content);
+      insertScript = "";
+      var scripts = content.split("<script>");
+      scripts.forEach((element, i) => {
+        if (i != 0) insertScript += "<script>" + element;
+      });
+      const fragment = document
+        .createRange()
+        .createContextualFragment(insertScript);
+      divRef.current.append(fragment);
     }
+    console.log(insertScript);
   }
 
   function renderCanvas(props) {
@@ -24,13 +35,9 @@ const Canvas = (props) => {
     if (window.innerHeight != canvas.height) {
       canvas.style.height = `${window.innerHeight}px`;
     }
-
-    totalX = canvas.clientWidth;
-    totalY = canvas.clientHeight;
     ctx.beginPath();
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    window.requestAnimationFrame(renderCanvas);
   }
   useEffect(() => {
     canvas = document.getElementById("exCanvas");
@@ -43,8 +50,18 @@ const Canvas = (props) => {
   }, []);
 
   useEffect(() => {
+    var holder =document.getElementById("ScriptHolder");
     GetHtml(false);
   }, [props.fileInput]);
+
+  useEffect(() => {
+    if (props.fileInput != "") {
+      console.log(insertScript);
+    }
+  }, [insertScript]);
+
+
+
 
   return (
     <div>
@@ -54,6 +71,7 @@ const Canvas = (props) => {
         width={window.innerWidth}
         height={window.innerHeight}
       ></canvas>
+      <div id="ScriptHolder" ref={divRef}></div>
     </div>
   );
 };

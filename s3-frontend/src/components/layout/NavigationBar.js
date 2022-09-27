@@ -24,10 +24,10 @@ const NavigationBar = (props) => {
               <userContext.Consumer>
                 {({ user }) => {
                   return user == null ? (
-                    <Nav.Item className="text-light">U bent uitgelogd</Nav.Item>
+                    <Nav.Item className="text-light">Je bent uitgelogd</Nav.Item>
                   ) : (
                     <p className="text-light">
-                      U bent ingelogd als {user.given_name}
+                      Je bent ingelogd als {user.given_name}
                     </p>
                   );
                 }}

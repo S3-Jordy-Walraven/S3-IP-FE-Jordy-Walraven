@@ -14,12 +14,13 @@ class AccountService {
   }
 
   logoutUser() {
-    return axios.post(
-      ACCOUNT_BASE_REST_API_URL + `?loginValue=""`,null,{withCredentials:true}
-    );
+    return axios.post(ACCOUNT_BASE_REST_API_URL + `?loginValue=""`, null, {
+      withCredentials: true,
+    });
   }
 
   async postUser(jwt) {
+    console.log(jwt);
     return await axios.post(
       ACCOUNT_BASE_REST_API_URL + `?loginValue=${jwt.credential}`,
       null,

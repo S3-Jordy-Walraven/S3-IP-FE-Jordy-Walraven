@@ -13,7 +13,7 @@ const Canvas = (props) => {
     if (content == false) {
       cService.getHtmlText(props.fileInput, GetHtml);
     } else {
-      console.log(content);
+      props.htmlStringCallback(content);
       insertScript = "";
       var scripts = content.split("<script>");
       scripts.forEach((element, i) => {
@@ -22,9 +22,9 @@ const Canvas = (props) => {
       const fragment = document
         .createRange()
         .createContextualFragment(insertScript);
+
       divRef.current.append(fragment);
     }
-    console.log(insertScript);
   }
 
   function renderCanvas(props) {
@@ -50,7 +50,7 @@ const Canvas = (props) => {
   }, []);
 
   useEffect(() => {
-    var holder =document.getElementById("ScriptHolder");
+    var holder = document.getElementById("ScriptHolder");
     GetHtml(false);
   }, [props.fileInput]);
 
@@ -59,9 +59,6 @@ const Canvas = (props) => {
       console.log(insertScript);
     }
   }, [insertScript]);
-
-
-
 
   return (
     <div>

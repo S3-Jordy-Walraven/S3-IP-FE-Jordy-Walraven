@@ -1,33 +1,20 @@
-import axios from "axios";
 
-const ACCOUNT_BASE_REST_API_URL = "http://localhost:8080/api/v1/account";
 class AccountService {
-  async AssignUser(jwt) {
-    let account = AccountService.getUser(jwt);
-    return account;
-  }
-
-  async loginUser() {
-    return await axios.get(ACCOUNT_BASE_REST_API_URL, {
-      withCredentials: true,
-    });
+   loginUser() {
+    try {
+      return sessionStorage.getItem("userLogin");
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
   }
 
   logoutUser() {
-    return axios.post(ACCOUNT_BASE_REST_API_URL + `?loginValue=""`, null, {
-      withCredentials: true,
-    });
+    sessionStorage.removeItem("userLogin");
   }
 
-  async postUser(jwt) {
-    console.log(jwt);
-    return await axios.post(
-      ACCOUNT_BASE_REST_API_URL + `?loginValue=${jwt.credential}`,
-      null,
-      {
-        withCredentials: true,
-      }
-    );
+   setUser(jwt) {
+    sessionStorage.setItem("userLogin", jwt);
   }
 
   parseJwt(token) {

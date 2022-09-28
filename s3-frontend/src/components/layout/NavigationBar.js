@@ -1,9 +1,17 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AccountService from "../../services/AccountService";
 import { userContext } from "../../userContext";
 
 const NavigationBar = (props) => {
+  const service = new AccountService();
+
+  function logout() {
+    props.value.userLogout();
+    service.logoutUser();
+  }
+
   return (
     <div>
       <Navbar
@@ -16,7 +24,13 @@ const NavigationBar = (props) => {
           <Navbar.Brand as={Link} to="/">
             Home
           </Navbar.Brand>
-          <Nav.Item className="text-light nav-link" as={Link} to="effect/upload">Upload</Nav.Item>
+          <Nav.Item
+            className="text-light nav-link"
+            as={Link}
+            to="effect/upload"
+          >
+            Upload
+          </Nav.Item>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
@@ -24,7 +38,9 @@ const NavigationBar = (props) => {
               <userContext.Consumer>
                 {({ user }) => {
                   return user == null ? (
-                    <Nav.Item className="text-light">Je bent uitgelogd</Nav.Item>
+                    <Nav.Item className="text-light">
+                      Je bent uitgelogd
+                    </Nav.Item>
                   ) : (
                     <p className="text-light">
                       Je bent ingelogd als {user.given_name}
@@ -41,10 +57,7 @@ const NavigationBar = (props) => {
                       </NavDropdown.Item>
                     ) : (
                       <NavDropdown.Item>
-                        <button
-                          className="border-0"
-                          onClick={props.value.userLogout}
-                        >
+                        <button className="border-0" onClick={logout}>
                           Logout
                         </button>
                       </NavDropdown.Item>

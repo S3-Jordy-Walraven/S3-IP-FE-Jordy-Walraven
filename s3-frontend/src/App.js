@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import NavigationBar from "./components/layout/NavigationBar";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./ColorStyle.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import LoginPage from "./pages/LoginPage";
+import { useState, useEffect } from "react";
+import { userContext } from "./userContext";
+import EffectUploadPage from "./pages/EffectUploadPage";
+import AccountService from "./services/AccountService";
 
 function App() {
+  const service = new AccountService();
+  const [stateUser, setStateUser] = useState(null);
+  const value = {
+    user: stateUser,
+    userLogin: loginUser,
+    userLogout: logoutUser,
+  };
+
+  function loginUser(stateCredentials) {
+    console.log(stateCredentials);
+    setStateUser(stateCredentials);
+  }
+
+  function logoutUser() {
+    setStateUser(null);
+  }
+
+  useEffect(() => {
+    let user = service.loginUser();
+    if (user != null && user != "") {
+      setStateUser(service.parseJwt(user));
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <userContext.Provider value={value}>
+        <Router>
+          <NavigationBar value={value} />
+          <Routes>
+            <Route exact path="/" element={<Homepage />} />
+            <Route
+              exact
+              path="/sign-up"
+              element={<LoginPage value={value} />}
+            />
+            <Route exact path="/effect/upload" element={<EffectUploadPage />} />
+          </Routes>
+        </Router>
+      </userContext.Provider>
     </div>
   );
 }

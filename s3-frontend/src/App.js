@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     let user = service.loginUser();
-    if (user != null && user != "") {
+    if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
     }
   }, []);

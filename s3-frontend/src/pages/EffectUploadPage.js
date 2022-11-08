@@ -20,6 +20,7 @@ const EffectUploadPage = () => {
       subjectId: stateUser.user.sub,
       creatorName: stateUser.user.name,
     };
+    
     console.log(data);
     service.createEffect(data);
   }
@@ -33,7 +34,7 @@ const EffectUploadPage = () => {
       <userContext.Consumer>
         {(value) => setStateUser(value)}
       </userContext.Consumer>
-      <Canvas fileInput={html} htmlStringCallback={SetString}></Canvas>
+      <Canvas fileInput={html} htmlStringCallback={SetString} finalString={htmlString}></Canvas>
       <div className="formBody">
         <form className="form" onSubmit={submitHandler}>
           <div className="mb-3">
@@ -46,7 +47,7 @@ const EffectUploadPage = () => {
                 id="EffectFile"
                 ref={htmlInput}
                 onChange={(e) => {
-                  const selectedFile = sethtml(
+                 sethtml(
                     document.getElementById("EffectFile").files[0]
                   );
                 }}

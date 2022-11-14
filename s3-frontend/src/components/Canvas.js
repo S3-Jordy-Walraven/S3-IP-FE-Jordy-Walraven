@@ -9,7 +9,7 @@ const Canvas = (props) => {
       cService.getHtmlText(props.fileInput, GetHtml);
     } else {
       console.log(content)
-      var head = content.split("</head>")[0].replace(`\\`,"");
+      var head = content.split("</head>")[0].replace(`\\`, "");
       var metaProp = head.split("property")
       var vars = [];
       var metaDefaults = head.split("default");
@@ -17,7 +17,7 @@ const Canvas = (props) => {
       var types = head.split("type");
       var typeValues = [];
       for (var i = 0; i < metaProp.length; i++) {
-        if (i !== 0 ) 
+        if (i !== 0)
           vars.push(metaProp[i].split(`="`)[1].split('"')[0]);
       }
       console.log(metaDefaults)
@@ -32,12 +32,12 @@ const Canvas = (props) => {
       var num = content.split("<script>")[0].length + 8;
       var script = content.substring(0, num);
       vars.forEach((element, i) => {
-        if(typeValues[i] === "number"){
+        if (typeValues[i] === "number") {
           script += `var ${element} =  ${defaultValues[i]}\n `
-        } else{
+        } else {
           script += `var ${element} =  "${defaultValues[i]}"\n `
         }
-  
+
       });
       var html = script + content.substring(num, content.length);
 
@@ -62,7 +62,7 @@ const Canvas = (props) => {
 
   return (
     <div id="wrap">
-      <iframe title="canvas" id="scaled-frame" srcDoc={props.finalString}  sandbox="allow-scripts " width="100%" height={100} >
+      <iframe title="canvas" id="scaled-frame" srcDoc={props.finalString} sandbox="allow-scripts " width="100%" height={100} >
       </iframe>
     </div>
   );

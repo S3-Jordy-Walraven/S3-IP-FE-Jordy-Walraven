@@ -43,9 +43,6 @@ const Canvas = (props) => {
 
       props.htmlStringCallback(html);
     }
-    console.log(html)
-    console.log(vars)
-    console.log(defaultValues)
   }
 
   useEffect(() => {

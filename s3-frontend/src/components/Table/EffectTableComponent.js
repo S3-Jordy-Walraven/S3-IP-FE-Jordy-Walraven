@@ -21,7 +21,7 @@ const EffectTableComponent = (props) => {
         <div style={{ margin: "50px" }}>
             <div className='row'>
                 {Effects.map((effect) => (
-                    <div className='col-md-2' style={{ height: "300px", marginBottom: "40px" }} >
+                    <div className='col-md-2' style={{width:"400px",  height: "300px", marginBottom: "40px" }} >
                         <EffectItem effect={effect} />
                         
                     </div>

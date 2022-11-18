@@ -26,3 +26,13 @@
     -webkit-transform: scale(2.48);
     -webkit-transform-origin: 0 0;
 }
+
+#reloadCanvas {
+    zoom: 0.75;
+    -moz-transform: scale(2.47);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(2.47);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(1.2);
+    -webkit-transform-origin: 0 0;
+}

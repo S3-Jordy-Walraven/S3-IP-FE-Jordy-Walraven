@@ -20,15 +20,16 @@ const Canvas = (props) => {
         if (i !== 0)
           vars.push(metaProp[i].split(`="`)[1].split('"')[0]);
       }
-      console.log(metaDefaults)
       for (let index = 0; index < metaDefaults.length; index++) {
         if (index !== 0)
           defaultValues.push(metaDefaults[index].split(`="`)[1].split('"')[0]);
       }
       for (let index = 0; index < types.length; index++) {
         if (index !== 0)
-          typeValues.push(types[index].split(`="`)[1].split('"')[0]);
+            typeValues.push(types[index].split(`="`)[1].split('"')[0]);
       }
+
+      console.log(typeValues)
       var num = content.split("<script>")[0].length + 8;
       var script = content.substring(0, num);
       vars.forEach((element, i) => {
@@ -43,9 +44,6 @@ const Canvas = (props) => {
 
       props.htmlStringCallback(html);
     }
-    console.log(html)
-    console.log(vars)
-    console.log(defaultValues)
   }
 
   useEffect(() => {

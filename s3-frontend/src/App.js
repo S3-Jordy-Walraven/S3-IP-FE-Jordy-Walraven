@@ -7,12 +7,15 @@ import Homepage from "./pages/Homepage";
 import LoginPage from "./pages/LoginPage";
 import { useState, useEffect } from "react";
 import { userContext } from "./userContext";
-import EffectUploadPage from "./pages/EffectUploadPage";
+import EffectUploadPage from "./pages/EffectPages/EffectUploadPage";
 import AccountService from "./services/AccountService";
+import EffectService from "./services/EffectService";
 
 function App() {
   const service = new AccountService();
+  const effectService = new EffectService();
   const [stateUser, setStateUser] = useState(null);
+  const [effects, setEffects] = useState([])
   const value = {
     user: stateUser,
     userLogin: loginUser,
@@ -28,11 +31,24 @@ function App() {
     setStateUser(null);
   }
 
+  function ReloadEffects() {
+    console.log("Reloading effects")
+    async function GetEffects() {
+      setEffects(await effectService.getAllEffects());
+    }
+    GetEffects();
+  }
+
   useEffect(() => {
     let user = service.loginUser();
     if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
     }
+    async function GetEffects() {
+      setEffects(await effectService.getAllEffects());
+    }
+    GetEffects();
+    console.log("Assign effects")
   }, []);
 
   return (
@@ -41,13 +57,13 @@ function App() {
         <Router>
           <NavigationBar value={value} />
           <Routes>
-            <Route exact path="/" element={<Homepage />} />
+            <Route exact path="/" element={<Homepage allEffects={effects} />} />
             <Route
               exact
               path="/sign-up"
               element={<LoginPage value={value} />}
             />
-            <Route exact path="/effect/upload" element={<EffectUploadPage />} />
+            <Route exact path="/effect/upload" element={<EffectUploadPage reloadCallback={ReloadEffects} />} />
           </Routes>
         </Router>
       </userContext.Provider>

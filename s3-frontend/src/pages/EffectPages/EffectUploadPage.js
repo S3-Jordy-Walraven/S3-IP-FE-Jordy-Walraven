@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import "../css/Form.css";
-import Canvas from "../components/Canvas";
-import { userContext } from "../userContext";
-import EffectService from "../services/EffectService";
+import "../../css/Form.css";
+import Canvas from "../../components/Canvas";
+import { userContext } from "../../userContext";
+import EffectService from "../../services/EffectService";
 
-const EffectUploadPage = () => {
+const EffectUploadPage = (props) => {
   const effectNameInput = useRef();
   const htmlInput = useRef();
   const [html, sethtml] = useState("");
@@ -12,7 +12,7 @@ const EffectUploadPage = () => {
   const [stateUser, setStateUser] = useState(null);
   const service = new EffectService();
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
     var data = {
       effectName: effectNameInput.current.value,
@@ -20,8 +20,16 @@ const EffectUploadPage = () => {
       subjectId: stateUser.user.sub,
       creatorName: stateUser.user.name,
     };
+
     console.log(data);
-    service.createEffect(data);
+    try {
+      await service.createEffect(data);
+      props.reloadCallback();
+    }
+    catch {
+
+    }
+
   }
 
   function SetString(Html) {
@@ -33,7 +41,7 @@ const EffectUploadPage = () => {
       <userContext.Consumer>
         {(value) => setStateUser(value)}
       </userContext.Consumer>
-      <Canvas fileInput={html} htmlStringCallback={SetString}></Canvas>
+      <Canvas fileInput={html} htmlStringCallback={SetString} finalString={htmlString}></Canvas>
       <div className="formBody">
         <form className="form" onSubmit={submitHandler}>
           <div className="mb-3">
@@ -46,7 +54,7 @@ const EffectUploadPage = () => {
                 id="EffectFile"
                 ref={htmlInput}
                 onChange={(e) => {
-                  const selectedFile = sethtml(
+                  sethtml(
                     document.getElementById("EffectFile").files[0]
                   );
                 }}

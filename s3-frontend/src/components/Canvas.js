@@ -1,74 +1,67 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import CanvasService from "../services/CanvasService";
-import sanitizeHtml from "sanitize-html";
+import "../css/Canvas.css"
 
 const Canvas = (props) => {
-  var canvas;
-  var ctx;
   var cService = new CanvasService();
-
-  const divRef = useRef();
-  var insertScript;
   function GetHtml(content) {
-    if (content == false) {
+    if (content === false) {
       cService.getHtmlText(props.fileInput, GetHtml);
     } else {
-      props.htmlStringCallback(content);
-      insertScript = "";
-      var scripts = content.split("<script>");
-      scripts.forEach((element, i) => {
-        if (i != 0) insertScript += "<script>" + element;
+      console.log(content)
+      var head = content.split("</head>")[0].replace(`\\`, "");
+      var metaProp = head.split("property")
+      var vars = [];
+      var metaDefaults = head.split("default");
+      var defaultValues = [];
+      var types = head.split("type");
+      var typeValues = [];
+      for (var i = 0; i < metaProp.length; i++) {
+        if (i !== 0)
+          vars.push(metaProp[i].split(`="`)[1].split('"')[0]);
+      }
+      for (let index = 0; index < metaDefaults.length; index++) {
+        if (index !== 0)
+          defaultValues.push(metaDefaults[index].split(`="`)[1].split('"')[0]);
+      }
+      for (let index = 0; index < types.length; index++) {
+        if (index !== 0)
+            typeValues.push(types[index].split(`="`)[1].split('"')[0]);
+      }
+
+      console.log(typeValues)
+      var num = content.split("<script>")[0].length + 8;
+      var script = content.substring(0, num);
+      vars.forEach((element, i) => {
+        if (typeValues[i] === "number") {
+          script += `var ${element} =  ${defaultValues[i]}\n `
+        } else {
+          script += `var ${element} =  "${defaultValues[i]}"\n `
+        }
+
       });
-      const fragment = document
-        .createRange()
-        .createContextualFragment(insertScript);
+      var html = script + content.substring(num, content.length);
 
-      divRef.current.append(fragment);
+      props.htmlStringCallback(html);
     }
   }
 
-  function renderCanvas(props) {
-    if (window.innerWidth != canvas.width) {
-      canvas.style.width = `${window.innerWidth}px`;
-    }
-
-    if (window.innerHeight != canvas.height) {
-      canvas.style.height = `${window.innerHeight}px`;
-    }
-    ctx.beginPath();
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
   useEffect(() => {
-    canvas = document.getElementById("exCanvas");
-    if (canvas != null) {
-      canvas.width = 320;
-      canvas.height = 200;
-      ctx = canvas.getContext("2d");
-      window.requestAnimationFrame(renderCanvas);
-    }
-  }, []);
-
-  useEffect(() => {
-    var holder = document.getElementById("ScriptHolder");
-    GetHtml(false);
+    console.log(props.fileInput)
+    if (props.fileInput)
+      GetHtml(false);
   }, [props.fileInput]);
 
   useEffect(() => {
-    if (props.fileInput != "") {
-      console.log(insertScript);
-    }
-  }, [insertScript]);
+
+  }, [props.finalString]);
+
+
 
   return (
-    <div>
-      <canvas
-        id="exCanvas"
-        className="zindex-fixed position-absolute m-0 position-absolute"
-        width={window.innerWidth}
-        height={window.innerHeight}
-      ></canvas>
-      <div id="ScriptHolder" ref={divRef}></div>
+    <div id="wrap">
+      <iframe title="canvas" id="scaled-frame" srcDoc={props.finalString} sandbox="allow-scripts " width="100%" height={100} >
+      </iframe>
     </div>
   );
 };

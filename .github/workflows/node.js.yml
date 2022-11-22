@@ -10,7 +10,7 @@ on:
     
 defaults:
   run:
-    working-directory: .\s3-frontend\
+    working-directory: s3-frontend\
 
 jobs:
   build:

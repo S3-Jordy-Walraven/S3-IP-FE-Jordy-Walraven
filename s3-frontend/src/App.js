@@ -49,6 +49,7 @@ function App() {
     }
     GetEffects();
     console.log("Assign effects")
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

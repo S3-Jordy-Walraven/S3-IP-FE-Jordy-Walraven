@@ -50,6 +50,7 @@ const Canvas = (props) => {
     console.log(props.fileInput)
     if (props.fileInput)
       GetHtml(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.fileInput]);
 
   useEffect(() => {

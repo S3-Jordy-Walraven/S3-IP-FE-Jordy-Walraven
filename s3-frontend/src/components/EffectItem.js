@@ -12,7 +12,7 @@ const EffectItem = (props) => {
 
     useEffect(() => {
 
-        if (props.effect.effectContent != null && props.effect.effectContent != undefined && renderHtml === "") {
+        if (props.effect.effectContent != null && props.effect.effectContent !== undefined && renderHtml === "") {
 
             var html = props.effect.effectContent;
             var num = html.split("<script>")[0].length + 8;
@@ -24,6 +24,7 @@ const EffectItem = (props) => {
             setRenderHtml(html2)
 
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderHtml])
 
     function mouseOverCallback() {

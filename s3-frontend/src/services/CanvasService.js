@@ -1,9 +1,8 @@
 class CanvasService {
   getHtmlText(html, callback) {
-    let returnval = "";
-    if (html != "") {
+    if (html !== "") {
       var r = new FileReader();
-      var x = (r.onload = function (e) {
+       (r.onload = function (e) {
         var contents = e.target.result;
         callback(contents);
       });

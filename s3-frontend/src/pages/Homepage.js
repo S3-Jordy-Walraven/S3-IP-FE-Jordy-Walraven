@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import EffectTableComponent from "../components/Table/EffectTableComponent";
-import EffectService from "../services/EffectService";
 
 
 const Homepage = (props) => {

@@ -4,9 +4,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [ "main","Development" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main","Development"  ]
+    branches: [ "main" ]
     
 defaults:
   run:

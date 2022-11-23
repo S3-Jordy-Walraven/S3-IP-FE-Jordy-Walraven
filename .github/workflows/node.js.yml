@@ -38,6 +38,6 @@ jobs:
           image: jordywalraven/signify-app
           registry: docker.io
           directory: s3-frontend
-          dockerfile: Dockerfile
+          dockerfile: s3-frontend/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}

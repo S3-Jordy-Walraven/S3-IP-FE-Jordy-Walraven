@@ -49,4 +49,4 @@ jobs:
       with:
         context: ./s3-frontend
         push: true
-        tags: user/signify:latest
+        tags: jordywalraven/signify:latest

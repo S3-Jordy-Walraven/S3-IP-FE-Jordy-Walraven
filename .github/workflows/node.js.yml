@@ -47,4 +47,4 @@ jobs:
       with:
         context: ./s3-frontend
         push: true
-        tags: jordywalraven/signify-appFE:latest
+        tags: jordywalraven/signify-app-frontend:latest

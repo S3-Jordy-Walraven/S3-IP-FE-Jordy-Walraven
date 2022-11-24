@@ -1,13 +1,11 @@
 
 
-name: CI/CD
+name: CI/CD Push
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-    
+
 defaults:
   run:
     working-directory: s3-frontend
@@ -49,4 +47,4 @@ jobs:
       with:
         context: ./s3-frontend
         push: true
-        tags: jordywalraven/signify-app:latest
+        tags: jordywalraven/signify-appFE:latest

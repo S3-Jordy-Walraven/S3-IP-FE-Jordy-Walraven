@@ -27,16 +27,6 @@ dummyEffects.data = [
 
 afterEach(cleanup)
 
-test('Should render 3 effects', () => {
-    render(<Homepage allEffects={dummyEffects} />);
-    const homePageElement = screen.getByTestId("homepage-1");
-    expect(homePageElement).toBeInTheDocument();
-    expect(homePageElement).toHaveTextContent("Signify");
-    expect(homePageElement).toHaveTextContent("Effect 1");
-    expect(homePageElement).toHaveTextContent("Effect 2");
-    expect(homePageElement).toHaveTextContent("Creator 3");
-    expect(homePageElement).toContainHTML("<script>console.log('hello')</script>");
-})
 
 
 test("matches snapshot", () => {

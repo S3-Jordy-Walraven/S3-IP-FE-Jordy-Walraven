@@ -3,20 +3,20 @@ import CanvasService from "../services/CanvasService";
 import "../css/Canvas.css"
 
 const Canvas = (props) => {
-  var cService = new CanvasService();
+  let cService = new CanvasService();
   function GetHtml(content) {
     if (content === false) {
       cService.getHtmlText(props.fileInput, GetHtml);
     } else {
       console.log(content)
-      var head = content.split("</head>")[0].replace(`\\`, "");
-      var metaProp = head.split("property")
-      var vars = [];
-      var metaDefaults = head.split("default");
-      var defaultValues = [];
-      var types = head.split("type");
-      var typeValues = [];
-      for (var i = 0; i < metaProp.length; i++) {
+      let head = content.split("</head>")[0].replace(`\\`, "");
+      let metaProp = head.split("property")
+      let vars = [];
+      let metaDefaults = head.split("default");
+      let defaultValues = [];
+      let types = head.split("type");
+      let typeValues = [];
+      for (let i = 0; i < metaProp.length; i++) {
         if (i !== 0)
           vars.push(metaProp[i].split(`="`)[1].split('"')[0]);
       }
@@ -30,8 +30,8 @@ const Canvas = (props) => {
       }
 
       console.log(typeValues)
-      var num = content.split("<script>")[0].length + 8;
-      var script = content.substring(0, num);
+      let num = content.split("<script>")[0].length + 8;
+      let script = content.substring(0, num);
       vars.forEach((element, i) => {
         if (typeValues[i] === "number") {
           script += `var ${element} =  ${defaultValues[i]}\n `
@@ -40,7 +40,7 @@ const Canvas = (props) => {
         }
 
       });
-      var html = script + content.substring(num, content.length);
+      let html = script + content.substring(num, content.length);
 
       props.htmlStringCallback(html);
     }

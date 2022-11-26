@@ -14,7 +14,7 @@ const EffectUploadPage = (props) => {
 
   async function submitHandler(event) {
     event.preventDefault();
-    var data = {
+    let data = {
       effectName: effectNameInput.current.value,
       effectContent: htmlString,
       subjectId: stateUser.user.sub,

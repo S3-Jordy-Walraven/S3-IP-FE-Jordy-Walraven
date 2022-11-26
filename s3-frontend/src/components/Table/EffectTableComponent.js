@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React,{ useEffect, useState } from 'react'
 import EffectItem from '../EffectItem'
 
 const EffectTableComponent = (props) => {

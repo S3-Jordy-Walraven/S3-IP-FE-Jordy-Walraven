@@ -38,16 +38,6 @@ test('Should render 3 effects', () => {
     expect(homePageElement).toContainHTML("<script>console.log('hello')</script>");
 })
 
-test('Should render 0 effects', () => {
-    render(<Homepage allEffects={{ data: [] }} />);
-    const homePageElement = screen.getByTestId("homepage-1");
-    expect(homePageElement).toBeInTheDocument();
-    expect(homePageElement).toHaveTextContent("Signify");
-    expect(homePageElement).not.toHaveTextContent("Effect 1");
-    expect(homePageElement).not.toHaveTextContent("Effect 2");
-    expect(homePageElement).not.toHaveTextContent("Creator 3");
-    expect(homePageElement).not.toContainHTML("<script>console.log('hello')</script>");
-})
 
 test("matches snapshot", () => {
     const tree = renderer.create(<Homepage allEffects={dummyEffects} />).toJSON();

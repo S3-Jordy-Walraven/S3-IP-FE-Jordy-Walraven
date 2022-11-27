@@ -31,12 +31,14 @@ function App() {
     setStateUser(null);
   }
 
-  function ReloadEffects() {
+  function ReloadEffects(state) {
     console.log("Reloading effects")
+
     async function GetEffects() {
       setEffects(await effectService.getAllEffects());
     }
-    GetEffects();
+    if (state !== false)
+      GetEffects();
   }
 
   useEffect(() => {
@@ -49,7 +51,7 @@ function App() {
     }
     GetEffects();
     console.log("Assign effects")
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

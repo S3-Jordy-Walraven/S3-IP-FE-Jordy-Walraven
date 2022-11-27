@@ -8,7 +8,7 @@ const Canvas = (props) => {
     if (content === false) {
       cService.getHtmlText(props.fileInput, GetHtml);
     } else {
-      console.log(content)
+
       let head = content.split("</head>")[0].replace(`\\`, "");
       let metaProp = head.split("property")
       let vars = [];
@@ -26,10 +26,10 @@ const Canvas = (props) => {
       }
       for (let index = 0; index < types.length; index++) {
         if (index !== 0)
-            typeValues.push(types[index].split(`="`)[1].split('"')[0]);
+          typeValues.push(types[index].split(`="`)[1].split('"')[0]);
       }
 
-      console.log(typeValues)
+
       let num = content.split("<script>")[0].length + 8;
       let script = content.substring(0, num);
       vars.forEach((element, i) => {
@@ -47,10 +47,9 @@ const Canvas = (props) => {
   }
 
   useEffect(() => {
-    console.log(props.fileInput)
     if (props.fileInput)
       GetHtml(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.fileInput]);
 
   useEffect(() => {

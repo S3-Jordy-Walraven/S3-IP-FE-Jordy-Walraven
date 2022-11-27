@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "../../css/Form.css";
 import Canvas from "../../components/Canvas";
 import { userContext } from "../../userContext";
@@ -9,27 +9,28 @@ const EffectUploadPage = (props) => {
   const htmlInput = useRef();
   const [html, sethtml] = useState("");
   const [htmlString, sethtmlString] = useState("");
-  const [stateUser, setStateUser] = useState(null);
+  const { stateUser } = useContext(userContext);
   const service = new EffectService();
+
 
   async function submitHandler(event) {
     event.preventDefault();
-    let data = {
-      effectName: effectNameInput.current.value,
-      effectContent: htmlString,
-      subjectId: stateUser.user.sub,
-      creatorName: stateUser.user.name,
-    };
-
-    console.log(data);
+    let data = [];
+    if (stateUser != undefined) {
+      data = {
+        effectName: effectNameInput.current.value,
+        effectContent: htmlString,
+        subjectId: stateUser.user.sub,
+        creatorName: stateUser.user.name,
+      };
+    }
+    props.reloadCallback(false);
     try {
       await service.createEffect(data);
       props.reloadCallback();
     }
     catch {
-
     }
-
   }
 
   function SetString(Html) {
@@ -37,10 +38,7 @@ const EffectUploadPage = (props) => {
   }
 
   return (
-    <div>
-      <userContext.Consumer>
-        {(value) => setStateUser(value)}
-      </userContext.Consumer>
+    <div data-testid="effectUploadPage-1">
       <Canvas fileInput={html} htmlStringCallback={SetString} finalString={htmlString}></Canvas>
       <div className="formBody">
         <form className="form" onSubmit={submitHandler}>
@@ -48,6 +46,7 @@ const EffectUploadPage = (props) => {
             <label className="form-label">
               EffectFile
               <input
+                data-testid="htmlInput-1"
                 className="form-control"
                 type="file"
                 accept=".html"
@@ -73,7 +72,7 @@ const EffectUploadPage = (props) => {
             </label>
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" data-testid="submitButton-1">
             Submit
           </button>
         </form>

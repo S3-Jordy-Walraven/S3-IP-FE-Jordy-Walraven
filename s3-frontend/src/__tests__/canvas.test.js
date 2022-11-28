@@ -4,7 +4,7 @@ import Canvas from "../components/Canvas";
 
 afterEach(cleanup);
 
-var dummyData = `<head>
+let dummyData = `<head>
   <title>Hyperspace</title>
   <meta description="Zoom through the stars with this lightscript. Adjust colors, particle size, and particle speed to change up how it looks." />
   <meta publisher="SignalRGB" />

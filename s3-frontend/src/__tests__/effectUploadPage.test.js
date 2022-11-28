@@ -1,4 +1,4 @@
-import { render, screen, cleanup, waitFor } from "@testing-library/react";
+import { render, screen, cleanup, } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import EffectUploadPage from "../pages/EffectPages/EffectUploadPage";
 import userEvent from "@testing-library/user-event";
@@ -25,13 +25,8 @@ test("file upload", () => {
 });
 
 test("test on submit", async () => {
-  let isCalled = false;
-  function ReloadEffects() {
-    console.log("Reloading effects");
-    isCalled = true;
-  }
 
-  render(<EffectUploadPage reloadCallback={ReloadEffects} />);
+  render(<EffectUploadPage reloadCallback={(code)=>""} />);
 
   const effectUploadPageElement = screen.getByTestId("effectUploadPage-1");
   const submitButton = screen.getByTestId("submitButton-1");

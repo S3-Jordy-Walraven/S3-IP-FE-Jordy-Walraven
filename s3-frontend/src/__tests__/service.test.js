@@ -1,6 +1,5 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { cleanup } from "@testing-library/react";
 
-import Homepage from "../pages/Homepage";
 import AccountService from "../services/AccountService";
 
 let dummyJWT =

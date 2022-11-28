@@ -30,7 +30,6 @@ function App() {
   }
 
   function ReloadEffects(state) {
-
     async function GetEffects() {
       setEffects(await effectService.getAllEffects());
     }
@@ -42,8 +41,8 @@ function App() {
     if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
     }
-
-      setEffects( effectService.getAllEffects());
+    console.log(effectService.getAllEffects());
+    setEffects(effectService.getAllEffects());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

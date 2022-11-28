@@ -17,14 +17,10 @@ exports[`matches snapshot 1`] = `
     </h1>
   </div>
   <div
-    style={
-      Object {
-        "margin": "50px",
-      }
-    }
+    className="container-fluid"
   >
     <div
-      className="row"
+      className="row justify-content-md-center"
     />
   </div>
 </div>

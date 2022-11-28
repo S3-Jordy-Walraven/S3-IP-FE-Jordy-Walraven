@@ -10,10 +10,10 @@ const EffectItem = (props) => {
     useEffect(() => {
 
         if (props.effect.effectContent != null && props.effect.effectContent !== undefined && renderHtml === "") {
-            var html = props.effect.effectContent;
-            var num = html.split("<script>")[0].length + 8;
-            var script = html.substring(0, num);
-            var html2 = script + html.substring(num, html.length);
+            let html = props.effect.effectContent;
+            let num = html.split("<script>")[0].length + 8;
+            let script = html.substring(0, num);
+            let html2 = script + html.substring(num, html.length);
             setRenderHtml(html2)
 
         }

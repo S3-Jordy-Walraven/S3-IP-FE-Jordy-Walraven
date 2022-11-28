@@ -15,7 +15,7 @@ function App() {
   const service = new AccountService();
   const effectService = new EffectService();
   const [stateUser, setStateUser] = useState(null);
-  const [effects, setEffects] = useState([])
+  const [effects, setEffects] = useState([]);
   const value = {
     user: stateUser,
     userLogin: loginUser,
@@ -23,20 +23,17 @@ function App() {
   };
 
   function loginUser(stateCredentials) {
-    console.log(stateCredentials);
     setStateUser(stateCredentials);
   }
-
   function logoutUser() {
     setStateUser(null);
   }
 
-  function ReloadEffects() {
-    console.log("Reloading effects")
+  function ReloadEffects(state) {
     async function GetEffects() {
       setEffects(await effectService.getAllEffects());
     }
-    GetEffects();
+    if (state !== false) GetEffects();
   }
 
   useEffect(() => {
@@ -44,16 +41,14 @@ function App() {
     if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
     }
-    async function GetEffects() {
-      setEffects(await effectService.getAllEffects());
-    }
-    GetEffects();
-    console.log("Assign effects")
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(effectService.getAllEffects());
+    setEffects(effectService.getAllEffects());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
+    <div data-testid="app-1">
       <userContext.Provider value={value}>
         <Router>
           <NavigationBar value={value} />
@@ -64,7 +59,11 @@ function App() {
               path="/sign-up"
               element={<LoginPage value={value} />}
             />
-            <Route exact path="/effect/upload" element={<EffectUploadPage reloadCallback={ReloadEffects} />} />
+            <Route
+              exact
+              path="/effect/upload"
+              element={<EffectUploadPage reloadCallback={ReloadEffects} />}
+            />
           </Routes>
         </Router>
       </userContext.Provider>

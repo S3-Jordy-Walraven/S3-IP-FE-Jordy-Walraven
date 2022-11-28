@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  data-testid="canvas-1"
+  id="wrap"
+>
+  <iframe
+    height={100}
+    id="scaled-frame"
+    sandbox="allow-scripts "
+    title="canvas"
+    width="100%"
+  />
+</div>
+`;

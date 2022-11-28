@@ -9,21 +9,19 @@ const EffectUploadPage = (props) => {
   const htmlInput = useRef();
   const [html, sethtml] = useState("");
   const [htmlString, sethtmlString] = useState("");
-  const { stateUser } = useContext(userContext);
+  const stateUser = useContext(userContext);
   const service = new EffectService();
 
   async function submitHandler(event) {
     event.preventDefault();
-    let data = [];
-    if (stateUser !== undefined) {
-      data = {
-        effectName: effectNameInput.current.value,
-        effectContent: htmlString,
-        subjectId: stateUser.user.sub,
-        creatorName: stateUser.user.name,
-      };
-    }
-    props.reloadCallback(false);
+    console.log(stateUser);
+    let data = {
+      effectName: effectNameInput.current.value,
+      effectContent: htmlString,
+      subjectId: stateUser.user.sub,
+      creatorName: stateUser.user.name,
+    };
+
     try {
       await service.createEffect(data);
       props.reloadCallback();

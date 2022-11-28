@@ -11,7 +11,6 @@ test("should render app", () => {
   expect(canvasElement).toHaveTextContent("Home");
 });
 
-
 test("matches snapshot", () => {
   const tree = renderer.create(<App />).toJSON();
   expect(tree).toMatchSnapshot();

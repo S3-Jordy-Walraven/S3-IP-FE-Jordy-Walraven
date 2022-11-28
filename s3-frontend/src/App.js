@@ -23,7 +23,6 @@ function App() {
   };
 
   function loginUser(stateCredentials) {
-    console.log(stateCredentials);
     setStateUser(stateCredentials);
   }
   function logoutUser() {
@@ -31,7 +30,6 @@ function App() {
   }
 
   function ReloadEffects(state) {
-    console.log("Reloading effects");
 
     async function GetEffects() {
       setEffects(await effectService.getAllEffects());
@@ -44,11 +42,9 @@ function App() {
     if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
     }
-    async function GetEffects() {
-      setEffects(await effectService.getAllEffects());
-    }
-    GetEffects();
-    console.log("Assign effects");
+
+      setEffects( effectService.getAllEffects());
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

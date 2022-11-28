@@ -18,7 +18,8 @@ class AccountService {
   }
 
   parseJwt(token) {
-    var base64Url = token.split(".")[1];
+    try{
+        var base64Url = token.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     var jsonPayload = decodeURIComponent(
       window
@@ -31,6 +32,10 @@ class AccountService {
     );
 
     return JSON.parse(jsonPayload);
+    } catch{
+      return null;
+    }
+  
   }
 }
 

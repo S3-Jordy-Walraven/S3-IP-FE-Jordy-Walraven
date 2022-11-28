@@ -12,7 +12,6 @@ const EffectUploadPage = (props) => {
   const { stateUser } = useContext(userContext);
   const service = new EffectService();
 
-
   async function submitHandler(event) {
     event.preventDefault();
     let data = [];
@@ -28,9 +27,7 @@ const EffectUploadPage = (props) => {
     try {
       await service.createEffect(data);
       props.reloadCallback();
-    }
-    catch {
-    }
+    } catch {}
   }
 
   function SetString(Html) {
@@ -39,7 +36,11 @@ const EffectUploadPage = (props) => {
 
   return (
     <div data-testid="effectUploadPage-1">
-      <Canvas fileInput={html} htmlStringCallback={SetString} finalString={htmlString}></Canvas>
+      <Canvas
+        fileInput={html}
+        htmlStringCallback={SetString}
+        finalString={htmlString}
+      ></Canvas>
       <div className="formBody">
         <form className="form" onSubmit={submitHandler}>
           <div className="mb-3">
@@ -53,9 +54,7 @@ const EffectUploadPage = (props) => {
                 id="EffectFile"
                 ref={htmlInput}
                 onChange={(e) => {
-                  sethtml(
-                    document.getElementById("EffectFile").files[0]
-                  );
+                  sethtml(document.getElementById("EffectFile").files[0]);
                 }}
               />
             </label>
@@ -72,7 +71,11 @@ const EffectUploadPage = (props) => {
             </label>
           </div>
 
-          <button type="submit" className="btn btn-primary" data-testid="submitButton-1">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            data-testid="submitButton-1"
+          >
             Submit
           </button>
         </form>

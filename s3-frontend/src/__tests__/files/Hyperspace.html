@@ -1,0 +1,337 @@
+<head>
+  <title>Hyperspace</title>
+  <meta description="Zoom through the stars with this lightscript. Adjust colors, particle size, and particle speed to change up how it looks." />
+  <meta publisher="SignalRGB" />
+
+          <meta property="shape" label="Star Shape" type="combobox" values="Circle,Rectangle,Star,RandomStars"
+            default="Circle" />
+                  <meta property="direction" label="Star move direction" type="combobox" values="Towards,Away" default="Towards" />
+            <meta property="bgMode" label="Background color mode" type="combobox" values="Static,Rainbow,Lines" default="Static" />
+  <meta
+    property="bgColor"
+    label="Background Color"
+    type="color"
+    min="0"
+    max="360"
+    default="#000000"
+  />
+    <meta property="rainbowBrightness" label="Rainbow Background Brightness " type="number" min="0" max="100" default="50" />
+    <meta property="lineColor" label="Background Line Color" type="color" min="0" max="360" default="#00c9fc" />
+  <meta
+    property="bgAlpha"
+    label="Background Opacity"
+    type="number"
+    min="10"
+    max="100"
+    default="10"
+  />
+  <meta
+    property="fgColor"
+    label="Foreground Color"
+    type="color"
+    min="0"
+    max="360"
+    default="#FFFFFF"
+  />
+  <meta
+    property="color_mode"
+    label="Color Mode"
+    type="combobox"
+    values="Single,Random,Rainbow"
+    default="Single"
+  />
+  <meta
+    property="starSpeed"
+    label="Speed"
+    type="number"
+    min="0"
+    max="100"
+    default="40"
+  />
+  <meta
+    property="starCount"
+    label="Number of stars"
+    type="number"
+    min="1"
+    max="10"
+    default="3"
+  />
+  <meta
+    property="starSize"
+    label="Star size"
+    type="number"
+    min="1"
+    max="10"
+    default="5"
+  />
+
+
+  
+</head>
+
+<body style="margin: 0; padding: 0">
+  <canvas id="exCanvas" width="320" height="200"></canvas>
+</body>
+
+<script>
+  const stars = document.getElementById("exCanvas");
+  const ctx = stars.getContext("2d");
+
+  let screen,
+    starsElements,
+    starsParams = { speed: 5, number: 300, extinction: 4 };
+
+  var bgColor = "#000000",
+    fgColor = "#FFFFFF",
+    bgAlpha = 0,
+    starSpeed = 4,
+    starCount = 3,
+    starSize = 5,
+    color_mode = "Single",
+    shape ="Circle"
+    direction ="Towards",
+    hue =1
+    bgMode ="Static"
+    lineColor ="#00c9fc"
+    rainbowBrightness = 50;
+
+  var rainbow = [
+    "#ff0000",
+    "#ff8000",
+    "#ffff00",
+    "#80ff00",
+    "#00ff00",
+    "#00ff80",
+    "#00ffff",
+    "#0080ff",
+    "#0000ff",
+    "#7f00ff",
+    "#ff00ff",
+    "#ff0080",
+  ];
+
+  let starCountMeter = new Meter(1, setupStars);
+
+  const randomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  function randomHex() {
+    var h = randomInt(0, 360);
+    var s = randomInt(42, 98);
+    var l = randomInt(40, 90);
+    l /= 100;
+    const a = (s * Math.min(l, 1 - l)) / 100;
+    const f = (n) => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color)
+        .toString(16)
+        .padStart(2, "0"); // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  }
+
+  setupStars();
+  updateStars();
+
+  function Star() {
+    this.x = Math.random() * stars.width;
+    this.y = Math.random() * stars.height;
+    this.z = Math.random() * stars.width;
+    this.color = randomHex();
+    this.rainbowColor = rainbow[Math.floor(Math.random() * rainbow.length)];
+    let randomVal =  Math.floor(Math.random() *10);
+
+    this.move = function () {
+      this.z -= direction =="Towards"? starsParams.speed:-starsParams.speed;
+      if (this.z <= 0 && direction =="Towards") {
+        this.z = 320;
+      } else if(this.z>=320 && direction =="Away"){
+        this.z = 0;
+      }
+    };
+
+    this.show = function () {
+      let x, y, rad, opacity;
+      x = (this.x - screen.c[0]) * (stars.width / this.z);
+      x = x + screen.c[0];
+      y = (this.y - screen.c[1]) * (stars.width / this.z);
+      y = y + screen.c[1];
+      rad = stars.width / this.z;
+      opacity =
+        rad > starsParams.extinction
+          ? 1.5 * (2 - rad / starsParams.extinction)
+          : 1;
+
+      ctx.beginPath();
+      let opacityAlpha = Math.round(opacity * 255).toString(16);
+
+      if (color_mode == "Random") {
+        ctx.fillStyle = this.color + opacityAlpha;
+      } else if (color_mode == "Single") {
+        ctx.fillStyle = fgColor + opacityAlpha;
+      } else if (color_mode == "Rainbow") {
+        ctx.fillStyle = this.rainbowColor + opacityAlpha;
+      }
+
+      let size = rad * (starSize / 5);
+
+      if(shape == "Circle"){
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+      } else if(shape == "Rectangle"){
+        ctx.rect(x- size /2,y- size /2, size, size)
+      } else if(shape =="Star"){
+        drawStar(x, y, 5, size, size / 2)
+      } else if(shape == "RandomStars"){
+        drawStar(x, y, randomVal, size, size / 2)
+      }
+
+      ctx.fill();
+    };
+  }
+
+  function drawStar(cx, cy, spikes, outerRadius, innerRadius,inColor) {
+    var rot = Math.PI / 2 * 3;
+    var x = x;
+    var y = y;
+    var step = Math.PI / spikes;
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius)
+    for (i = 0; i < spikes; i++) {
+      x = cx + Math.cos(rot) * outerRadius;
+      y = cy + Math.sin(rot) * outerRadius;
+      ctx.lineTo(x, y)
+      rot += step
+
+      x = cx + Math.cos(rot) * innerRadius;
+      y = cy + Math.sin(rot) * innerRadius;
+      ctx.lineTo(x, y)
+      rot += step
+    }
+    ctx.lineTo(cx, cy - outerRadius);
+    ctx.closePath();
+    ctx.lineWidth = 5;
+    ctx.fill();
+  }
+
+  function setupStars() {
+    screen = {
+      w: window.innerWidth,
+      h: window.innerHeight,
+      c: [window.innerWidth * 0.5, window.innerHeight * 0.5],
+    };
+    window.cancelAnimationFrame(updateStars);
+    stars.width = screen.w;
+    stars.height = screen.h;
+    starsElements = [];
+    for (let i = 0; i < starsParams.number; i++) {
+      starsElements[i] = new Star();
+    }
+  }
+
+  function updateStars() {
+    starsParams.speed = starSpeed / 10;
+    starCountMeter.setValue(starCount);
+    starsParams.number = starCountMeter.value * 100;
+
+    if(bgMode == "Static"){
+      var bgFull = bgColor + Math.round((bgAlpha / 100) * 255).toString(16);
+      ctx.fillStyle = bgFull;
+      if (starSpeed > 0) {
+        ctx.fillRect(0, 0, stars.width, stars.height);
+      }
+    }
+ 
+    if(bgMode == "Rainbow"){
+      TravelBackground();
+    }
+    if(bgMode == "Lines"){
+      LineBackground();
+    }
+
+    starsElements.forEach(function (s) {
+      s.show();
+      s.move();
+    });
+    window.requestAnimationFrame(updateStars);
+  }
+
+  function TravelBackground(){
+    ctx.globalAlpha = bgAlpha /100;
+     for (i = 0; i < 250; i++) {
+      var ringHue = hue + (i);
+      ctx.beginPath();
+      ctx.strokeStyle = "hsl(" + ringHue + ",100%, "+ rainbowBrightness +"%)";
+      ctx.arc(160, 100, i, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+
+    if (direction == "Away") {
+      hue += starSpeed / 20;
+    } else {
+      hue -= starSpeed / 20;
+    }
+    ctx.globalAlpha = 1;
+  }
+
+    function LineBackground() {
+        ctx.globalAlpha = bgAlpha/100;
+        for (i = 0; i < 250; i++) {
+          var ringHue = hue + (i);
+
+          ctx.beginPath();
+               if (Math.abs(ringHue) % 100 < 10) {
+          ctx.strokeStyle = lineColor;
+           } else {
+               ctx.strokeStyle = "black";
+           }
+          ctx.arc(160, 100, i, 0, 2 * Math.PI);
+          ctx.stroke();
+              
+        }
+
+        if (direction == "Away") {
+          hue += starSpeed / 20;
+        } else {
+          hue -= starSpeed / 20;
+        }
+
+        ctx.globalAlpha = 1;
+      }
+
+
+  function Meter(count, callback) {
+    this.size = count;
+    this.value = 0;
+    this.diff = 0;
+    this.increased = false;
+    this.decreased = false;
+    var values = [];
+
+    this.setValue = function (updatedValue) {
+      // Add and shift.
+      values.push(updatedValue);
+      if (values.length > this.size) {
+        values.shift();
+      }
+
+      // Exit early if we've got a long-term match.
+      for (var i = 0; i < values.length - 1; i++) {
+        if (values[i] !== values[i + 1]) return;
+      }
+
+      // We got here, so we've got a matching value collection.
+      if (this.value !== values[0]) {
+        //var fromZero = this.value === 0;
+        //var toZero = values[0] === 0;
+        this.diff = Math.abs(this.value - values[0]);
+        this.increased = this.value < values[0];
+        this.decreased = this.value > values[0];
+        this.value = values[0];
+        callback();
+      }
+    };
+  }
+</script>

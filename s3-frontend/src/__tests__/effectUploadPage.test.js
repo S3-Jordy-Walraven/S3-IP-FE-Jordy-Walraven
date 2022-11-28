@@ -16,9 +16,7 @@ test("should render canvas", () => {
 
 test("file upload", () => {
     render(
-        <userContext.Provider value={{ user: { sub: "hallo" } }}>
             <EffectUploadPage/>
-        </userContext.Provider>
     );
 
     const effectUploadPageElement = screen.getByTestId("effectUploadPage-1");
@@ -30,7 +28,6 @@ test("file upload", () => {
 
 test("test on submit", () => {
     let isCalled = false;
-
     function ReloadEffects() {
         console.log("Reloading effects")
         isCalled = true;
@@ -38,7 +35,6 @@ test("test on submit", () => {
 
     render(
             <EffectUploadPage reloadCallback={ReloadEffects} />
-
     );
 
     const effectUploadPageElement = screen.getByTestId("effectUploadPage-1");

@@ -5,6 +5,7 @@ exports[`matches snapshot 1`] = `
   data-testid="effectUploadPage-1"
 >
   <div
+    data-testid="canvas-1"
     id="wrap"
   >
     <iframe

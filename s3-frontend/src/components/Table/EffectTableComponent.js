@@ -13,7 +13,7 @@ const EffectTableComponent = (props) => {
         if (typeof props.effects === "object" && props.effects !== []) {
           try {
             props.effects.then((data) => {
-              setEffects(data.data);
+              if (data !== undefined && "data" in data) setEffects(data.data);
             });
           } catch {}
         }

@@ -15,7 +15,7 @@ const EffectUploadPage = (props) => {
   async function submitHandler(event) {
     event.preventDefault();
     let data = [];
-    if (stateUser != undefined) {
+    if (stateUser !== undefined) {
       data = {
         effectName: effectNameInput.current.value,
         effectContent: htmlString,

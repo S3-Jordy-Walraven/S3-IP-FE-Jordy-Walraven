@@ -1,7 +1,6 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import EffectUploadPage from "../pages/EffectPages/EffectUploadPage"
-import { userContext } from "../userContext";
 import userEvent from "@testing-library/user-event"
 
 afterEach(cleanup)

@@ -1,9 +1,6 @@
 import { render, screen, cleanup, waitFor } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import Canvas from "../components/Canvas";
-import userEvent from "@testing-library/user-event";
-import { useState } from "react";
-import Html from "./files/Hyperspace.html"
 
 afterEach(cleanup);
 

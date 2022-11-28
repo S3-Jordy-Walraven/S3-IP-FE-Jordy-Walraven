@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  data-testid="app-1"
+>
+  <div>
+    <nav
+      className="general-dark-bg navbar navbar-expand-lg navbar-dark"
+    >
+      <div
+        className="container"
+      >
+        <a
+          className="navbar-brand"
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+        <a
+          className="text-light nav-link nav-item"
+          href="/effect/upload"
+          onClick={[Function]}
+        >
+          Upload
+        </a>
+        <button
+          aria-controls="responsive-navbar-nav"
+          aria-label="Toggle navigation"
+          className="navbar-toggler collapsed"
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            className="navbar-toggler-icon"
+          />
+        </button>
+        <div
+          aria-expanded={null}
+          className="navbar-collapse collapse"
+          id="responsive-navbar-nav"
+        >
+          <div
+            className="me-auto navbar-nav"
+            onKeyDown={[Function]}
+          />
+          <div
+            className="navbar-nav"
+            onKeyDown={[Function]}
+          >
+            <div
+              className="text-light nav-item"
+            >
+              Je bent uitgelogd
+            </div>
+            <div
+              className="nav-item dropdown"
+            >
+              <a
+                aria-expanded={false}
+                className="dropdown-toggle nav-link"
+                data-rr-ui-event-key={null}
+                href="#"
+                id="collasible-nav-dropdown"
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                role="button"
+                tabIndex={0}
+              >
+                Profile
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div
+    data-testid="homepage-1"
+  >
+    <div>
+      <h1
+        style={
+          Object {
+            "marginTop": "20px",
+            "textAlign": "center",
+          }
+        }
+      >
+        Signify
+      </h1>
+    </div>
+    <div
+      style={
+        Object {
+          "margin": "50px",
+        }
+      }
+    >
+      <div
+        className="row"
+      />
+    </div>
+  </div>
+</div>
+`;

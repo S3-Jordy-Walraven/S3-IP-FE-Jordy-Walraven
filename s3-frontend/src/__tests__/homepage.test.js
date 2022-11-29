@@ -1,6 +1,6 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import Homepage from "../pages/Homepage"
+import Homepage from "../pages/GeneralPages/Homepage"
 
 
 const dummyEffects = { data: [] }

@@ -1,15 +1,13 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import AccountService from "../../services/AccountService";
 import { userContext } from "../../userContext";
 
 const NavigationBar = (props) => {
-  const service = new AccountService();
+  const User = React.useContext(userContext);
 
   function logout() {
-    props.value.userLogout();
-    service.logoutUser();
+    User.userLogout();
   }
 
   return (

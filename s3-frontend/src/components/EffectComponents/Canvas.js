@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import CanvasService from "../services/CanvasService";
-import "../css/Canvas.css";
+import CanvasService from "../../services/CanvasService";
+import "../../css/Canvas.css";
 
 const Canvas = (props) => {
   let cService = new CanvasService();

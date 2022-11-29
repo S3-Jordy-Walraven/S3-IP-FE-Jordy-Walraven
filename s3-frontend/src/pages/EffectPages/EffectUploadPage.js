@@ -1,6 +1,6 @@
 import React, { useRef, useState, useContext } from "react";
 import "../../css/Form.css";
-import Canvas from "../../components/Canvas";
+import Canvas from "../../components/EffectComponents/Canvas";
 import { userContext } from "../../userContext";
 import EffectService from "../../services/EffectService";
 

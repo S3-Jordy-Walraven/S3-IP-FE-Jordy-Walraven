@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Card from './layout/Card'
-import classes from "../css/EffectItem.css"
-import "../css/Canvas.css"
+import Card from '../../layout/Card'
+import classes from "../../../css/EffectItem.css"
+import "../../../css/Canvas.css"
 
 
 

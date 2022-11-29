@@ -3,8 +3,8 @@ import NavigationBar from "./components/layout/NavigationBar";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./ColorStyle.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Homepage from "./pages/Homepage";
-import LoginPage from "./pages/LoginPage";
+import Homepage from "./pages/GeneralPages/Homepage";
+import LoginPage from "./pages/GeneralPages/LoginPage";
 import { useState, useEffect } from "react";
 import { userContext } from "./userContext";
 import EffectUploadPage from "./pages/EffectPages/EffectUploadPage";
@@ -16,17 +16,19 @@ function App() {
   const effectService = new EffectService();
   const [stateUser, setStateUser] = useState(null);
   const [effects, setEffects] = useState([]);
+
   const value = {
     user: stateUser,
     userLogin: loginUser,
     userLogout: logoutUser,
   };
-
   function loginUser(stateCredentials) {
-    setStateUser(stateCredentials);
+    setStateUser(service.parseJwt(stateCredentials));
+    service.setUser(stateCredentials);
   }
   function logoutUser() {
     setStateUser(null);
+    service.logoutUser();
   }
 
   function ReloadEffects(state) {
@@ -51,13 +53,13 @@ function App() {
     <div data-testid="app-1">
       <userContext.Provider value={value}>
         <Router>
-          <NavigationBar value={value} />
+          <NavigationBar />
           <Routes>
             <Route exact path="/" element={<Homepage allEffects={effects} />} />
             <Route
               exact
               path="/sign-up"
-              element={<LoginPage value={value} />}
+              element={<LoginPage />}
             />
             <Route
               exact

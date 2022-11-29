@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { userContext } from "../../userContext";
+import { userContext } from "../../context/userContext";
 const LoginPage = () => {
   const navigate = useNavigate();
   const User = React.useContext(userContext);

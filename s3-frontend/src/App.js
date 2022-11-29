@@ -6,10 +6,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/GeneralPages/Homepage";
 import LoginPage from "./pages/GeneralPages/LoginPage";
 import { useState, useEffect } from "react";
-import { userContext } from "./userContext";
+import { userContext } from "./context/userContext";
 import EffectUploadPage from "./pages/EffectPages/EffectUploadPage";
 import AccountService from "./services/AccountService";
 import EffectService from "./services/EffectService";
+import EffectDetailPage from "./pages/EffectPages/EffectDetailPage";
 
 function App() {
   const service = new AccountService();
@@ -52,22 +53,31 @@ function App() {
   return (
     <div data-testid="app-1">
       <userContext.Provider value={value}>
-        <Router>
-          <NavigationBar />
-          <Routes>
-            <Route exact path="/" element={<Homepage allEffects={effects} />} />
-            <Route
-              exact
-              path="/sign-up"
-              element={<LoginPage />}
-            />
-            <Route
-              exact
-              path="/effect/upload"
-              element={<EffectUploadPage reloadCallback={ReloadEffects} />}
-            />
-          </Routes>
-        </Router>
+          <Router>
+            <NavigationBar />
+            <Routes>
+              <Route exact path="/" element={<Homepage allEffects={effects} />} />
+              <Route
+                exact
+                path="/sign-up"
+                element={<LoginPage />}
+              />
+
+              <Route
+                exact
+                path="/effect/upload"
+                element={<EffectUploadPage reloadCallback={ReloadEffects} />}
+              />
+
+              <Route
+                exact
+                path="/effect/details/:id"
+                element={<EffectDetailPage />}
+              />
+
+
+            </Routes>
+          </Router>
       </userContext.Provider>
     </div>
   );

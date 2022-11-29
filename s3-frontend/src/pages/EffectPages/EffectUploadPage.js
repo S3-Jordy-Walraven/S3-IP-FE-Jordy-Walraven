@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext } from "react";
 import "../../css/Form.css";
 import Canvas from "../../components/EffectComponents/Canvas";
-import { userContext } from "../../userContext";
+import { userContext } from "../../context/userContext";
 import EffectService from "../../services/EffectService";
 
 const EffectUploadPage = (props) => {
@@ -25,7 +25,7 @@ const EffectUploadPage = (props) => {
     try {
       await service.createEffect(data);
       props.reloadCallback();
-    } catch {}
+    } catch { }
   }
 
   function SetString(Html) {

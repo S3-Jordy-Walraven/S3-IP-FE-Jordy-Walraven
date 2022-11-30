@@ -37,21 +37,29 @@ const EffectDetailPage = (props) => {
         anchor.click();
     }
 
+    function oneclickCallback() {
+        var anchor = document.createElement("a");
+        anchor.href = `Signify://${effect.effectName}`;
+        anchor.click();
+    }
+
+
+
 
     return (
         <div>
-            <button onClick={backButtonCallback} className="btn btn-primary m-5" style={{ width: "5%", height: "5%" }}>Back</button>
+            <button onClick={backButtonCallback} className="btn btn-danger m-5 pt-3 pb-3" >Back to home</button>
             {
                 effect !== null ?
                     <div>
                         <div style={{ textAlign: "center", marginTop: "2%", marginBottom: "-2%" }}>
                             <h1>{effect.effectName}</h1>
-
-                            <Canvas finalString={effect != null ? effect.effectContent : null} />
+                            <Canvas  finalString={effect != null ? effect.effectContent : null} />
                             <h2>By {effect.creatorName}</h2>
                         </div>
                         <div className='d-flex justify-content-center' style={{ marginTop: "3%" }}>
                             <button className='btn btn-primary m-2 p-3' onClick={handleShow}>View code</button>
+                            <button className='btn btn-warning m-2 p-3' onClick={oneclickCallback}>oneClick install</button>
                             <button className='btn btn-success m-2 p-3' onClick={downloadButtonCallback}>Download</button>
                         </div>
 

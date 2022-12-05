@@ -2,18 +2,19 @@ import { render, screen, cleanup, } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import EffectUploadPage from "../pages/EffectPages/EffectUploadPage";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter as Router } from "react-router-dom";
 
 afterEach(cleanup);
 
 test("should render canvas", () => {
-  render(<EffectUploadPage />);
+  render(<Router><EffectUploadPage /></Router>);
   const effectUploadPageElement = screen.getByTestId("effectUploadPage-1");
   expect(effectUploadPageElement).toBeInTheDocument();
   expect(effectUploadPageElement).toHaveTextContent("EffectFile");
 });
 
 test("file upload", () => {
-  render(<EffectUploadPage />);
+  render(<Router><EffectUploadPage /></Router>);
 
   const effectUploadPageElement = screen.getByTestId("effectUploadPage-1");
   const htmlInput = screen.getByTestId("htmlInput-1");
@@ -26,7 +27,7 @@ test("file upload", () => {
 
 test("test on submit", async () => {
 
-  render(<EffectUploadPage reloadCallback={(code)=>""} />);
+  render(<Router><EffectUploadPage reloadCallback={(code) => ""} /></Router>);
 
   const effectUploadPageElement = screen.getByTestId("effectUploadPage-1");
   const submitButton = screen.getByTestId("submitButton-1");
@@ -35,6 +36,6 @@ test("test on submit", async () => {
 });
 
 test("matches snapshot", () => {
-  const tree = renderer.create(<EffectUploadPage />).toJSON();
+  const tree = renderer.create(<Router> <EffectUploadPage /></Router>).toJSON();
   expect(tree).toMatchSnapshot();
 });

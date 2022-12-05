@@ -73,7 +73,7 @@ const EffectDetailPage = (props) => {
                             <Modal.Header closeButton>
                                 <Modal.Title>Effect Code</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body scrollable>{<pre><code data-testid="codeViewer-1">{effect.effectContent}</code></pre>}</Modal.Body>
+                            <Modal.Body scrollable="true">{<pre><code data-testid="codeViewer-1">{effect.effectContent}</code></pre>}</Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close

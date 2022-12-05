@@ -5,6 +5,7 @@ import EffectService from '../../services/EffectService';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+
 const EffectDetailPage = (props) => {
     const { id } = useParams();
     const service = new EffectService();
@@ -17,10 +18,15 @@ const EffectDetailPage = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        service.getEffectById(id).then((data) => {
-            console.log(data);
-            setEffect(data.data);
-        })
+        if (id !== undefined) {
+            service.getEffectById(id).then((data) => {
+                console.log(data);
+                setEffect(data.data);
+            })
+        } else if (props.effect !== undefined) {
+            setEffect(props.effect);
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -47,27 +53,27 @@ const EffectDetailPage = (props) => {
 
 
     return (
-        <div>
-            <button onClick={backButtonCallback} className="btn btn-danger m-5 pt-3 pb-3" >Back to home</button>
+        <div data-testid="effectDetailPage-1">
+            <button data-testid="backButton-1" onClick={backButtonCallback} className="btn btn-danger m-5 pt-3 pb-3" >Back to home</button>
             {
                 effect !== null ?
                     <div>
                         <div style={{ textAlign: "center", marginTop: "2%", marginBottom: "-2%" }}>
                             <h1>{effect.effectName}</h1>
-                            <Canvas  finalString={effect != null ? effect.effectContent : null} />
+                            <Canvas finalString={effect != null ? effect.effectContent : null} />
                             <h2>By {effect.creatorName}</h2>
                         </div>
                         <div className='d-flex justify-content-center' style={{ marginTop: "3%" }}>
-                            <button className='btn btn-primary m-2 p-3' onClick={handleShow}>View code</button>
-                            <button className='btn btn-warning m-2 p-3' onClick={oneclickCallback}>oneClick install</button>
-                            <button className='btn btn-success m-2 p-3' onClick={downloadButtonCallback}>Download</button>
+                            <button className='btn btn-primary m-2 p-3' data-testid="viewCodeButton-1" onClick={handleShow}>View code</button>
+                            <button className='btn btn-warning m-2 p-3' data-testid="onClick-1" onClick={oneclickCallback}>oneClick install</button>
+                            <button className='btn btn-success m-2 p-3' data-testid="downloadButton-1" onClick={downloadButtonCallback}>Download</button>
                         </div>
 
                         <Modal show={show} onHide={handleClose} size="xl">
                             <Modal.Header closeButton>
                                 <Modal.Title>Effect Code</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body scrollable>{<pre><code>{effect.effectContent}</code></pre>}</Modal.Body>
+                            <Modal.Body scrollable>{<pre><code data-testid="codeViewer-1">{effect.effectContent}</code></pre>}</Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close

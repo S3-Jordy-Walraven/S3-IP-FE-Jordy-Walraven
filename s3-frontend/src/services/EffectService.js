@@ -6,19 +6,12 @@ class EffectService {
     return axios.post(ACCOUNT_BASE_REST_API_URL, effect);
   }
 
-  getEffectById(effectId) {
-    try {
-      return axios.get(ACCOUNT_BASE_REST_API_URL + "/" + effectId);
-    } catch {
-      return null;
-    }
-
+  async getEffectById(effectId) {
+    return await axios.get(ACCOUNT_BASE_REST_API_URL + "/" + effectId);
   }
 
   async getAllEffects() {
-    try {
-      return await axios.get(ACCOUNT_BASE_REST_API_URL);
-    } catch { }
+    return await axios.get(ACCOUNT_BASE_REST_API_URL);
   }
 }
 

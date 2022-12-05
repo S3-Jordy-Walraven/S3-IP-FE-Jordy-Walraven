@@ -1,68 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches snapshot 1`] = `
-<div
-  data-testid="effectUploadPage-1"
->
+Array [
+  " ",
   <div
-    data-testid="canvas-1"
-    id="wrap"
+    data-testid="effectUploadPage-1"
   >
-    <iframe
-      height={100}
-      id="scaled-frame"
-      sandbox="allow-scripts "
-      srcDoc=""
-      title="canvas"
-      width="100%"
-    />
-  </div>
-  <div
-    className="formBody"
-  >
-    <form
-      className="form"
-      onSubmit={[Function]}
+    <div
+      data-testid="canvas-1"
+      id="wrap"
     >
-      <div
-        className="mb-3"
+      <iframe
+        height={100}
+        id="scaled-frame"
+        sandbox="allow-scripts "
+        srcDoc=""
+        title="canvas"
+        width="100%"
+      />
+    </div>
+    <div
+      className="formBody"
+    >
+      <form
+        className="form"
+        onSubmit={[Function]}
       >
-        <label
-          className="form-label"
+        <div
+          className="mb-3"
         >
-          EffectFile
-          <input
-            accept=".html"
-            className="form-control"
-            data-testid="htmlInput-1"
-            id="EffectFile"
-            onChange={[Function]}
-            type="file"
-          />
-        </label>
-      </div>
-      <div
-        className="mb-3"
-      >
-        <label
-          className="form-label"
+          <label
+            className="form-label"
+          >
+            EffectFile
+            <input
+              accept=".html"
+              className="form-control"
+              data-testid="htmlInput-1"
+              id="EffectFile"
+              onChange={[Function]}
+              type="file"
+            />
+          </label>
+        </div>
+        <div
+          className="mb-3"
         >
-          Effect name
-          <input
-            className="form-control"
-            id="effectName"
-            type="Effect Name"
-          />
-        </label>
-      </div>
-      <button
-        className="btn btn-primary"
-        data-testid="submitButton-1"
-        type="submit"
-      >
-        Submit
-      </button>
-    </form>
-  </div>
-</div>
+          <label
+            className="form-label"
+          >
+            Effect name
+            <input
+              className="form-control"
+              id="effectName"
+              type="Effect Name"
+            />
+          </label>
+        </div>
+        <button
+          className="btn btn-primary"
+          data-testid="submitButton-1"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>,
+]
 `;

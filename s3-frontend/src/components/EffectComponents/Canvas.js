@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import CanvasService from "../services/CanvasService";
-import "../css/Canvas.css";
+import CanvasService from "../../services/CanvasService";
+import "../../css/Canvas.css";
 
 const Canvas = (props) => {
   let cService = new CanvasService();
@@ -8,7 +8,7 @@ const Canvas = (props) => {
     if (content === false) {
       cService.getHtmlText(props.fileInput, GetHtml);
     } else {
-   
+
       let head = content.split("</head>")[0].replace(`\\`, "");
       let metaProp = head.split("property");
       let vars = [];
@@ -48,7 +48,9 @@ const Canvas = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.fileInput]);
 
-  useEffect(() => {}, [props.finalString]);
+  useEffect(() => {
+    console.log(props.finalString)
+  }, [props.finalString]);
 
   return (
     <div id="wrap" data-testid="canvas-1">

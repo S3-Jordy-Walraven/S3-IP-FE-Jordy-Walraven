@@ -1,6 +1,7 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import Homepage from "../pages/Homepage"
+import Homepage from "../pages/GeneralPages/Homepage"
+import { BrowserRouter as Router } from "react-router-dom";
 
 
 const dummyEffects = { data: [] }
@@ -28,7 +29,7 @@ dummyEffects.data = [
 afterEach(cleanup)
 
 test('Should render 3 effects', () => {
-    render(<Homepage allEffects={dummyEffects} />);
+    render(<Router> <Homepage allEffects={dummyEffects} /></Router>);
     const homePageElement = screen.getByTestId("homepage-1");
     expect(homePageElement).toBeInTheDocument();
     expect(homePageElement).toHaveTextContent("Signify");
@@ -39,7 +40,7 @@ test('Should render 3 effects', () => {
 })
 
 test('Should render 0 effects', () => {
-    render(<Homepage allEffects={{ data: [] }} />);
+    render(<Router><Homepage allEffects={{ data: [] }} /></Router>);
     const homePageElement = screen.getByTestId("homepage-1");
     expect(homePageElement).toBeInTheDocument();
     expect(homePageElement).toHaveTextContent("Signify");

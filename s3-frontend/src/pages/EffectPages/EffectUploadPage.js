@@ -1,8 +1,9 @@
 import React, { useRef, useState, useContext } from "react";
 import "../../css/Form.css";
-import Canvas from "../../components/Canvas";
-import { userContext } from "../../userContext";
+import Canvas from "../../components/EffectComponents/Canvas";
+import { userContext } from "../../context/userContext";
 import EffectService from "../../services/EffectService";
+import { useNavigate } from "react-router-dom";
 
 const EffectUploadPage = (props) => {
   const effectNameInput = useRef();
@@ -11,6 +12,7 @@ const EffectUploadPage = (props) => {
   const [htmlString, sethtmlString] = useState("");
   const stateUser = useContext(userContext);
   const service = new EffectService();
+  const navigate = useNavigate();
 
   async function submitHandler(event) {
     event.preventDefault();
@@ -25,7 +27,8 @@ const EffectUploadPage = (props) => {
     try {
       await service.createEffect(data);
       props.reloadCallback();
-    } catch {}
+      navigate("/");
+    } catch { }
   }
 
   function SetString(Html) {

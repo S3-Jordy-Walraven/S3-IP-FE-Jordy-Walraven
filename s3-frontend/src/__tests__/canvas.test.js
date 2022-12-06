@@ -1,6 +1,6 @@
 import { render, screen, cleanup, waitFor } from "@testing-library/react";
 import renderer from "react-test-renderer";
-import Canvas from "../components/Canvas";
+import Canvas from "../components/EffectComponents/Canvas";
 
 afterEach(cleanup);
 

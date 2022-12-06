@@ -12,6 +12,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-bootstrap-validation": "^0.1.11",
+    "react-code-prettify": "^0.0.1",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
     "react-router-dom": "^6.3.0",
@@ -42,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-preview": "^0.3.1"
   }
 }

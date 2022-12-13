@@ -18,7 +18,7 @@ test("should render effect", () => {
 
     const effectUploadPageElement = screen.getByTestId("effectDetailPage-1");
     expect(effectUploadPageElement).toBeInTheDocument();
-    expect(effectUploadPageElement).toHaveTextContent("TestEffect");
+    expect(effectUploadPageElement).toHaveTextContent("TESTEFFECT");
     expect(effectUploadPageElement).toHaveTextContent("Tester");
     expect(effectUploadPageElement).toHaveTextContent("View code");
 });

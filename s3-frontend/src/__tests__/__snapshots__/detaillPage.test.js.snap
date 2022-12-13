@@ -5,6 +5,11 @@ Array [
   " ",
   <div
     data-testid="effectDetailPage-1"
+    style={
+      Object {
+        "color": "white",
+      }
+    }
   >
     <button
       className="btn btn-danger m-5 pt-3 pb-3"

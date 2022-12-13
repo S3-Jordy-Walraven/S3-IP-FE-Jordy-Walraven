@@ -36,7 +36,7 @@ const EffectUploadPage = (props) => {
   }
 
   return (
-    <div data-testid="effectUploadPage-1">
+    <div data-testid="effectUploadPage-1" style={{ color: "white" }}>
       <Canvas
         fileInput={html}
         htmlStringCallback={SetString}
@@ -47,6 +47,7 @@ const EffectUploadPage = (props) => {
           <div className="mb-3">
             <label className="form-label">
               EffectFile
+              
               <input
                 data-testid="htmlInput-1"
                 className="form-control"
@@ -54,6 +55,7 @@ const EffectUploadPage = (props) => {
                 accept=".html"
                 id="EffectFile"
                 ref={htmlInput}
+                style={{ background: "#212D3A", color: "white", border: "0px" }}
                 onChange={(e) => {
                   sethtml(document.getElementById("EffectFile").files[0]);
                 }}
@@ -68,6 +70,7 @@ const EffectUploadPage = (props) => {
                 className="form-control"
                 id="effectName"
                 ref={effectNameInput}
+                style={{ backgroundColor: "#212D3A", color: "white", border: "0px" }}
               />
             </label>
           </div>

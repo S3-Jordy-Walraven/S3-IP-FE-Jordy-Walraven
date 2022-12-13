@@ -35,6 +35,7 @@ const EffectTableComponent = (props) => {
                 width: "400px",
                 height: "300px",
                 marginBottom: "40px",
+            
               }}
             >
               <EffectItem effect={effect} />

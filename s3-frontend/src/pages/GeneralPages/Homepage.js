@@ -6,7 +6,7 @@ const Homepage = (props) => {
   return (
     <div data-testid="homepage-1">
       <div>
-        <h1 style={{ textAlign: "center", marginTop: "20px" }}>Signify</h1>
+        <h1 style={{ textAlign: "center", marginTop: "20px", color: "white" }}>SIGNIFY</h1>
       </div>
       <EffectTableComponent effects={props.allEffects} />
     </div>

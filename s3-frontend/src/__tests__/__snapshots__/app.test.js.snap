@@ -10,7 +10,9 @@ exports[`matches snapshot 1`] = `
     }
   }
 >
-  <div>
+  <div
+    data-testid="navBar"
+  >
     <nav
       className="navbar navbar-expand-lg navbar-dark"
       style={

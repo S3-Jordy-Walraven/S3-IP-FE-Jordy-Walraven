@@ -13,7 +13,7 @@ const NavigationBar = (props) => {
   }
 
   return (
-    <div >
+    <div data-testid="navBar" >
       <Navbar
         collapseOnSelect
         expand="lg"

@@ -3,10 +3,25 @@
 exports[`matches snapshot 1`] = `
 <div
   data-testid="app-1"
+  style={
+    Object {
+      "backgroundColor": "#060B11",
+      "font": "Copperplate",
+    }
+  }
 >
-  <div>
+  <div
+    data-testid="navBar"
+  >
     <nav
-      className="general-dark-bg navbar navbar-expand-lg navbar-dark"
+      className="navbar navbar-expand-lg navbar-dark"
+      style={
+        Object {
+          "backgroundColor": "#212D3A",
+          "paddingBottom": "0.5%",
+          "paddingTop": "0.5%",
+        }
+      }
     >
       <div
         className="container"
@@ -17,13 +32,6 @@ exports[`matches snapshot 1`] = `
           onClick={[Function]}
         >
           Home
-        </a>
-        <a
-          className="text-light nav-link nav-item"
-          href="/effect/upload"
-          onClick={[Function]}
-        >
-          Upload
         </a>
         <button
           aria-controls="responsive-navbar-nav"
@@ -45,33 +53,19 @@ exports[`matches snapshot 1`] = `
             className="me-auto navbar-nav"
             onKeyDown={[Function]}
           />
-          <div
-            className="navbar-nav"
-            onKeyDown={[Function]}
+          <a
+            className="btn btn-primary"
+            href="/sign-up"
+            onClick={[Function]}
+            style={
+              Object {
+                "background": "#688CC6",
+                "border": "0px",
+              }
+            }
           >
-            <div
-              className="text-light nav-item"
-            >
-              Je bent uitgelogd
-            </div>
-            <div
-              className="nav-item dropdown"
-            >
-              <a
-                aria-expanded={false}
-                className="dropdown-toggle nav-link"
-                data-rr-ui-event-key={null}
-                href="#"
-                id="collasible-nav-dropdown"
-                onClick={[Function]}
-                onKeyDown={[Function]}
-                role="button"
-                tabIndex={0}
-              >
-                Profile
-              </a>
-            </div>
-          </div>
+            Login
+          </a>
         </div>
       </div>
     </nav>
@@ -83,12 +77,13 @@ exports[`matches snapshot 1`] = `
       <h1
         style={
           Object {
+            "color": "white",
             "marginTop": "20px",
             "textAlign": "center",
           }
         }
       >
-        Signify
+        SIGNIFY
       </h1>
     </div>
     <div

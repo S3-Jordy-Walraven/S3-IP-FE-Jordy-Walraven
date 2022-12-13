@@ -40,6 +40,7 @@ function App() {
   }
 
   useEffect(() => {
+    document.body.style = "background: #060B11;"
     let user = service.loginUser();
     if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
@@ -51,33 +52,33 @@ function App() {
   }, []);
 
   return (
-    <div data-testid="app-1">
+    <div data-testid="app-1" style={{ backgroundColor: "#060B11", font: "Copperplate" }}>
       <userContext.Provider value={value}>
-          <Router>
-            <NavigationBar />
-            <Routes>
-              <Route exact path="/" element={<Homepage allEffects={effects} />} />
-              <Route
-                exact
-                path="/sign-up"
-                element={<LoginPage />}
-              />
+        <Router>
+          <NavigationBar />
+          <Routes>
+            <Route exact path="/" element={<Homepage allEffects={effects} />} />
+            <Route
+              exact
+              path="/sign-up"
+              element={<LoginPage />}
+            />
 
-              <Route
-                exact
-                path="/effect/upload"
-                element={<EffectUploadPage reloadCallback={ReloadEffects} />}
-              />
+            <Route
+              exact
+              path="/effect/upload"
+              element={<EffectUploadPage reloadCallback={ReloadEffects} />}
+            />
 
-              <Route
-                exact
-                path="/effect/details/:id"
-                element={<EffectDetailPage />}
-              />
+            <Route
+              exact
+              path="/effect/details/:id"
+              element={<EffectDetailPage />}
+            />
 
 
-            </Routes>
-          </Router>
+          </Routes>
+        </Router>
       </userContext.Provider>
     </div>
   );

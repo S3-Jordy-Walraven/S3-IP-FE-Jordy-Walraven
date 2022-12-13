@@ -32,9 +32,9 @@ test('Should render 3 effects', () => {
     render(<Router> <Homepage allEffects={dummyEffects} /></Router>);
     const homePageElement = screen.getByTestId("homepage-1");
     expect(homePageElement).toBeInTheDocument();
-    expect(homePageElement).toHaveTextContent("Signify");
-    expect(homePageElement).toHaveTextContent("Effect 1");
-    expect(homePageElement).toHaveTextContent("Effect 2");
+    expect(homePageElement).toHaveTextContent("SIGNIFY");
+    expect(homePageElement).toHaveTextContent("EFFECT 1");
+    expect(homePageElement).toHaveTextContent("EFFECT 2");
     expect(homePageElement).toHaveTextContent("Creator 3");
     expect(homePageElement).toContainHTML("<script>console.log('hello')</script>");
 })
@@ -43,9 +43,9 @@ test('Should render 0 effects', () => {
     render(<Router><Homepage allEffects={{ data: [] }} /></Router>);
     const homePageElement = screen.getByTestId("homepage-1");
     expect(homePageElement).toBeInTheDocument();
-    expect(homePageElement).toHaveTextContent("Signify");
-    expect(homePageElement).not.toHaveTextContent("Effect 1");
-    expect(homePageElement).not.toHaveTextContent("Effect 2");
+    expect(homePageElement).toHaveTextContent("SIGNIFY");
+    expect(homePageElement).not.toHaveTextContent("EFFECT 1");
+    expect(homePageElement).not.toHaveTextContent("EFFECT 2");
     expect(homePageElement).not.toHaveTextContent("Creator 3");
     expect(homePageElement).not.toContainHTML("<script>console.log('hello')</script>");
 })

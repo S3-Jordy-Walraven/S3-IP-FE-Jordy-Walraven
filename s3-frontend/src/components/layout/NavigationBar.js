@@ -2,6 +2,8 @@ import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { userContext } from "../../context/userContext";
+import Avatar from '@mui/material/Avatar';
+
 
 const NavigationBar = (props) => {
   const User = React.useContext(userContext);
@@ -11,63 +13,54 @@ const NavigationBar = (props) => {
   }
 
   return (
-    <div>
+    <div data-testid="navBar" >
       <Navbar
         collapseOnSelect
         expand="lg"
-        className="general-dark-bg"
+        style={{ backgroundColor: "#212D3A", paddingTop: "0.5%", paddingBottom: "0.5%" }}
         variant="dark"
       >
         <Container>
           <Navbar.Brand as={Link} to="/">
             Home
           </Navbar.Brand>
-          <Nav.Item
-            className="text-light nav-link"
-            as={Link}
-            to="effect/upload"
-          >
-            Upload
-          </Nav.Item>
+
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
-            <Nav>
-              <userContext.Consumer>
-                {({ user }) => {
-                  return user == null ? (
-                    <Nav.Item className="text-light">
-                      Je bent uitgelogd
-                    </Nav.Item>
-                  ) : (
-                    <p className="text-light">
-                      Je bent ingelogd als {user.given_name}
-                    </p>
-                  );
-                }}
-              </userContext.Consumer>
-              <NavDropdown title="Profile" id="collasible-nav-dropdown">
-                <userContext.Consumer>
-                  {({ user }) => {
-                    return user == null ? (
-                      <NavDropdown.Item as={Link} to="sign-up">
-                        Login
-                      </NavDropdown.Item>
+            <userContext.Consumer>
+              {({ user }) => {
+                return user == null ? (
+                  <Link className="btn btn-primary" style={{ background: "#688CC6", border: "0px" }} to="sign-up" >Login</Link>
+                ) : (
+                  <Nav style={{ color: "white" }}>
+                    {user == null ? (
+                      <></>
                     ) : (
-                      <NavDropdown.Item>
-                        <button className="border-0" onClick={logout}>
-                          Logout
-                        </button>
-                      </NavDropdown.Item>
-                    );
-                  }}
-                </userContext.Consumer>
-              </NavDropdown>
-            </Nav>
+                      <>
+                        <Nav.Item
+                          className="text-light nav-link"
+                          as={Link}
+                          to="effect/upload"
+                          style={{marginRight:"5%"}}
+                        >
+                          Upload
+                        </Nav.Item>
+                        {user != null && <Avatar alt={user.name} src={user.picture} sx={{ height: "50%", width: "15%", marginTop: "auto", marginBottom: "auto" }} />}
+                      </>
+                    )}
+                    <NavDropdown bg="#212D3A" title={user.name} id="navbarScrollingDropdown" >
+                      <NavDropdown.Item as={Link} to="my-effects">My Effects</NavDropdown.Item>
+                      <NavDropdown.Item><p onClick={logout}>Logout</p></NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                );
+              }}
+            </userContext.Consumer>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </div>
+    </div >
   );
 };
 

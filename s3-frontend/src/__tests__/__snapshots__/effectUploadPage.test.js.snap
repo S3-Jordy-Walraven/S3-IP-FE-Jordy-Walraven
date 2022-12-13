@@ -5,6 +5,11 @@ Array [
   " ",
   <div
     data-testid="effectUploadPage-1"
+    style={
+      Object {
+        "color": "white",
+      }
+    }
   >
     <div
       data-testid="canvas-1"
@@ -39,6 +44,13 @@ Array [
               data-testid="htmlInput-1"
               id="EffectFile"
               onChange={[Function]}
+              style={
+                Object {
+                  "background": "#212D3A",
+                  "border": "0px",
+                  "color": "white",
+                }
+              }
               type="file"
             />
           </label>
@@ -53,6 +65,13 @@ Array [
             <input
               className="form-control"
               id="effectName"
+              style={
+                Object {
+                  "backgroundColor": "#212D3A",
+                  "border": "0px",
+                  "color": "white",
+                }
+              }
               type="Effect Name"
             />
           </label>

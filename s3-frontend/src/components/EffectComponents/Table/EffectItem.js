@@ -34,8 +34,8 @@ const EffectItem = (props) => {
         <Card>
             <iframe id="reloadCanvas" style={{ overflow: "hidden", marginBottom: "50px" }} title="canvas" srcDoc={renderHtml} sandbox="allow-scripts" width="100%" height="60%" scrolling='no' loading='lazy' onMouseEnter={mouseOverCallback} onClick={toDetailPage}  >
             </iframe>
-            <div onClick={toDetailPage} style={{cursor:"grab"}} className={classes.content}>
-                <h3>{props.effect.effectName}</h3>
+            <div onClick={toDetailPage} style={{ cursor: "grab" }} className={classes.content}>
+                <h3>{props.effect.effectName.toUpperCase()}</h3>
                 <p>{props.effect.creatorName}</p>
             </div>
         </Card >

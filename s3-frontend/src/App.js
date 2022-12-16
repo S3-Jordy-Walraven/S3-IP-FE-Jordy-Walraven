@@ -18,7 +18,6 @@ function App() {
   const effectService = new EffectService();
   const [stateUser, setStateUser] = useState(null);
   const [effects, setEffects] = useState([]);
-  const [myEffects, setMyEffects] = useState([]);
 
   const value = {
     user: stateUser,
@@ -37,7 +36,6 @@ function App() {
   function ReloadEffects(state) {
     async function GetEffects() {
       setEffects(await effectService.getAllEffects());
-      setMyEffects(await effectService.getEffectsByUser(stateUser.sub))
     }
     if (state !== false) GetEffects();
   }
@@ -45,21 +43,15 @@ function App() {
   useEffect(() => {
     document.body.style = "background: #060B11;"
     let user = service.loginUser();
-    if (user !== null && user !== "" && stateUser == null) {
+    if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
     }
 
     console.log(effectService.getAllEffects());
     setEffects(effectService.getAllEffects());
 
-    console.log("STATE USER");
-    console.log(stateUser);
-    if(stateUser != null){
-      setMyEffects(effectService.getEffectsByUser(stateUser.sub));
-    }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stateUser]);
+  }, []);
 
   return (
     <div data-testid="app-1" style={{ backgroundColor: "#060B11", font: "Copperplate" }}>
@@ -89,7 +81,7 @@ function App() {
             <Route
               exact
               path="/effect/user/"
-              element={<MyEffectPage effects={myEffects}/>}
+              element={<MyEffectPage stateUser={stateUser}/>}
             />
           </Routes>
         </Router>

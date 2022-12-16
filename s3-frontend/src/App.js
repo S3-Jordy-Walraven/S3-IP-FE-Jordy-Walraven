@@ -11,12 +11,14 @@ import EffectUploadPage from "./pages/EffectPages/EffectUploadPage";
 import AccountService from "./services/AccountService";
 import EffectService from "./services/EffectService";
 import EffectDetailPage from "./pages/EffectPages/EffectDetailPage";
+import MyEffectPage from "./pages/EffectPages/MyEffectPage";
 
 function App() {
   const service = new AccountService();
   const effectService = new EffectService();
   const [stateUser, setStateUser] = useState(null);
   const [effects, setEffects] = useState([]);
+  const [myEffects, setMyEffects] = useState([]);
 
   const value = {
     user: stateUser,
@@ -35,6 +37,7 @@ function App() {
   function ReloadEffects(state) {
     async function GetEffects() {
       setEffects(await effectService.getAllEffects());
+      setMyEffects(await effectService.getEffectsByUser(stateUser.sub))
     }
     if (state !== false) GetEffects();
   }
@@ -42,14 +45,21 @@ function App() {
   useEffect(() => {
     document.body.style = "background: #060B11;"
     let user = service.loginUser();
-    if (user !== null && user !== "") {
+    if (user !== null && user !== "" && stateUser == null) {
       setStateUser(service.parseJwt(user));
     }
+
     console.log(effectService.getAllEffects());
     setEffects(effectService.getAllEffects());
 
+    console.log("STATE USER");
+    console.log(stateUser);
+    if(stateUser != null){
+      setMyEffects(effectService.getEffectsByUser(stateUser.sub));
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [stateUser]);
 
   return (
     <div data-testid="app-1" style={{ backgroundColor: "#060B11", font: "Copperplate" }}>
@@ -76,7 +86,11 @@ function App() {
               element={<EffectDetailPage />}
             />
 
-
+            <Route
+              exact
+              path="/effect/user/"
+              element={<MyEffectPage effects={myEffects}/>}
+            />
           </Routes>
         </Router>
       </userContext.Provider>

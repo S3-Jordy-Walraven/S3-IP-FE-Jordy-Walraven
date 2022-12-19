@@ -7,13 +7,13 @@ function MyEffectPage(props) {
     const [stateMyEffects, setMyEffects] = useState([]);
 
     useEffect(() => {
-
         console.log("STATE USER");
         console.log(props.stateUser);
         if(props.stateUser != null){
           setMyEffects(effectService.getEffectsByUser(props.stateUser.sub));
         }
-
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     

@@ -16,6 +16,11 @@ class EffectService {
     return await axios.get(ACCOUNT_BASE_REST_API_URL).catch((error) => {
     });
   }
+
+  async getEffectsByUser(id){
+    return await axios.get(ACCOUNT_BASE_REST_API_URL + "/user/" + id).catch((error) => {
+    });
+  }
 }
 
 export default EffectService;

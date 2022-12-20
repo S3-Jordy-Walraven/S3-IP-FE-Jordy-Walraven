@@ -11,6 +11,7 @@ import EffectUploadPage from "./pages/EffectPages/EffectUploadPage";
 import AccountService from "./services/AccountService";
 import EffectService from "./services/EffectService";
 import EffectDetailPage from "./pages/EffectPages/EffectDetailPage";
+import MyEffectPage from "./pages/EffectPages/MyEffectPage";
 
 function App() {
   const service = new AccountService();
@@ -45,6 +46,7 @@ function App() {
     if (user !== null && user !== "") {
       setStateUser(service.parseJwt(user));
     }
+
     console.log(effectService.getAllEffects());
     setEffects(effectService.getAllEffects());
 
@@ -76,7 +78,11 @@ function App() {
               element={<EffectDetailPage />}
             />
 
-
+            <Route
+              exact
+              path="/effect/user/"
+              element={<MyEffectPage stateUser={stateUser}/>}
+            />
           </Routes>
         </Router>
       </userContext.Provider>

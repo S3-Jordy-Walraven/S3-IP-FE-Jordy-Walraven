@@ -50,7 +50,7 @@ const NavigationBar = (props) => {
                       </>
                     )}
                     <NavDropdown bg="#212D3A" title={user.name} id="navbarScrollingDropdown" >
-                      <NavDropdown.Item as={Link} to="my-effects">My Effects</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="effect/user/">My Effects</NavDropdown.Item>
                       <NavDropdown.Item><p onClick={logout}>Logout</p></NavDropdown.Item>
                     </NavDropdown>
                   </Nav>
